@@ -40,7 +40,7 @@ class UserFactory extends Factory
                 'name' => 'MarkJC',
                 'email' => 'markjc@mweb.co.za',
                 'email_verified_at' => now(),
-                'password' => '$2y$10$bq11QPOak8z48jcJi0C.o.F2Eqlah2igJsbMGBKmP45WgUljMCG4y', // my fav password
+                'password' => '$2y$10$QHh5p2YeDz1JQT/gUpghZOaQQPnwq1dWbCTJzfM4SSINOiUDj13lW', // password
                 'remember_token' => Str::random(10),
                 'is_admin' => true
             ];

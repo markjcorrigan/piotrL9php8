@@ -122,7 +122,7 @@ class PostsController extends Controller
         if ($request->hasFile('thumbnail')) {
             $path = $request->file('thumbnail')->store('public/thumbnail');
             $blogPost->image()->save(
-                Image::create(['path' => $path])
+                Image::make(['path' => $path])
                 ////NB this url works on local http://127.0.0.1:8000/storage/thumbnail/TMiCDEHSMyUJm4y6xFMlLeUfCBWpCSKxbK2v0qSC.png
             );
         }
@@ -258,7 +258,7 @@ class PostsController extends Controller
                 $post->image->save();
             } else {
                 $post->image()->save(
-                    Image::create(['path' => $path])
+                    Image::make(['path' => $path])
                 );
             }
         }

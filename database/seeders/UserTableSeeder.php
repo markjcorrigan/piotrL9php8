@@ -21,23 +21,14 @@ class UserTableSeeder extends Seeder
             User::factory()->markjc()->create();
             $this->command->info('Admin was added');
 
+            //  Generate unique password for your admin
+            //  >>>php artisan tinker
+            //  >>> echo Hash::make('123456');
+            //  >>> $2y$10$JHK.2MTc9ORMmmlqoF.gg.SwDLnevVSj1oreHParu5PvcPEDOWqe6
+
         }
 
     }
 
-    public function markjc()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'name' => 'MarkJC',
-                'email' => 'markjc@mweb.co.za',
-                'email_verified_at' => now(),
-                'password' => '$2y$10$bq11QPOak8z48jcJi0C.o.F2Eqlah2igJsbMGBKmP45WgUljMCG4y', // my fav password
-                'remember_token' => Str::random(10),
-                'is_admin' => true
-            ];
 
-        });
-
-    }
 }

@@ -21,7 +21,10 @@ class AuthServiceProvider extends ServiceProvider
 //    ];
 
     protected $policies = [
+
         BlogPost::class => 'App\Policies\BlogPostPolicy',
+        'App\Model' => 'App\Policies\ModelPolicy',
+        'App\Models\User' => 'App\Policies\UserPolicy'
     ];
 
 
@@ -58,7 +61,7 @@ class AuthServiceProvider extends ServiceProvider
 //        }
 //        });
 
-//
+
       Gate::before(function ($user, $ability) {
             if($user->is_admin && in_array($ability, ['update', 'delete'])) {
             return true;  //can perform all actions prohibited by the Gate actions above.

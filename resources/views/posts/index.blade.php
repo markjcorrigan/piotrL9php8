@@ -67,10 +67,12 @@
                                 </x-badge>
 
                             @endif
-                            <small><p class="text-muted">
-                                    Added {{ $post->created_at->diffForHumans() }}
-                                    by {{ $post->user->name }}
-                                </p></small>
+{{--                            <small><p class="text-muted">--}}
+{{--                                    Added {{ $post->created_at->diffForHumans() }}--}}
+{{--                                    by {{ $post->user->name }}--}}
+{{--                                </p></small>--}}
+                           <x-updated :date="$post->created_at" :name="$post->user->name">@slot( 'userId', $post->user->id )</x-updated>
+
                             <x-tags :tags="$post->tags" >
                             </x-tags>
 
