@@ -38,7 +38,7 @@
 
                             @if($post->image)
                                 <div class="fit-bg"  style="background-image: url('{{ $post->image->url() }}');  min-height: 700px; color: white; text-align: center; background-image:fixed; " >
-                                    <h1 style="padding-top: 100px; text-shadow: 1px 2px #000">
+                                    <h1 style="padding-top: 20px; text-shadow: 1px 2px #000; background: rgba(0, 0, 0, 0.1)">
                                         @else
                                             <h1>
                                                 @endif
