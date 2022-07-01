@@ -9,6 +9,8 @@
         @csrf
         @method('PUT')
 
+
+
         @include('posts._form')
 
         <button type="submit" class="btn btn-primary btn-block">Update!</button>

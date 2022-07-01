@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\URL;
 use App\Models\Image;
 
 
+
 class PostsController extends Controller
 {
 //    private $posts = [

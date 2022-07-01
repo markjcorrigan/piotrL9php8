@@ -79,27 +79,21 @@
 
 
 
-                <p class="text-muted">Currently read by: {{ $counter }} </p>
+                <p class="text-muted">Currently read by {{ $counter }} people </p>
                 <hr>
                 <x-tags :tags="$post->tags" >
                 </x-tags>
                 <hr>
                 <h4>Comments</h4>
-                @include('comments._form')
-                @forelse($post->comments as $comment)
-                    <p>
-                        {{ $comment->content }}
-                    </p>
+                        <x-commentForm :route=" route('posts.comments.store', ['post' => $post->id]) ">
+                        </x-commentForm>
+
+                        <x-commentList :comments=" $post->comments ">
+                        </x-commentList>
 
 
-                    <x-updated :date="$comment->created_at" :name="$comment->user->name">Comment Updated</x-updated>
-                    <p class="text-muted">
-                        added {{ $comment->created_at->diffForHumans() }}
-                    </p>
 
-                @empty
-                    <p>No comments yet!</p>
-                @endforelse
+
             </div>
             </div>
         </div>

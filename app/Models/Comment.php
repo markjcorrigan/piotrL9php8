@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
 
+
 class Comment extends Model
 {
     use HasFactory;
@@ -15,13 +16,6 @@ class Comment extends Model
     use SoftDeletes;
 
     protected $fillable = ['user_id', 'content'];
-
-    // blog_post_id
-//    public function blogPost()
-//    {
-//        // return $this->belongsTo('App\BlogPost', 'post_id', 'blog_post_id');
-//        return $this->belongsTo('App\Models\BlogPost');
-//    }
 
     public function commentable()
     {
@@ -38,12 +32,14 @@ class Comment extends Model
         return $query->orderBy(static::CREATED_AT, 'desc');
     }
 
+
     public static function boot()
     {
         parent::boot();
 
         static::creating(function (Comment $comment) {
-
+            // dump($comment);
+            // dd(BlogPost::class);
             if ($comment->commentable_type === BlogPost::class) {
                 Cache::tags(['blog-post'])->forget("blog-post-{$comment->commentable_id}");
                 Cache::tags(['blog-post'])->forget('mostCommented');

@@ -3,8 +3,8 @@
 @section('title', 'Edit User Profile')
 @section('content')
     <form method="POST" enctype="multipart/form-data"
-        action="{{ route('users.update', ['user' => $user->id]) }}"
-        class="form-horizontal">
+          action="{{ route('users.update', ['user' => $user->id]) }}"
+          class="form-horizontal">
 
         @csrf
         @method('PUT')
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-4">
                 <img src="{{ $user->image ? $user->image->url() : '' }}"
-                class="img-thumbnail avatar" />
+                     class="img-thumbnail avatar" />
 
                 <div class="card mt-4">
                     <div class="card-body">
@@ -26,8 +26,12 @@
                     <label>Name:</label>
                     <input class="form-control" value="" type="text" name="name" />
                 </div>
+{{--                <x-commentForm :route=" 'users.comments.store', ['user' => $user->id] ">--}}
+{{--                </x-commentForm>--}}
 
-                <x-errors></x-errors>
+{{--                <x-commentList :comments="$user->commentsOn">--}}
+{{--                </x-commentList>--}}
+{{--                <x-errors></x-errors>--}}
 
                 <div class="form-group">
                     <input type="submit" class="btn btn-primary" value="Save Changes" />
