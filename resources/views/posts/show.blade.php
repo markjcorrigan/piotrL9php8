@@ -37,7 +37,8 @@
                         <div class="card p-3" >
 
                             @if($post->image)
-                                <div class="fit-bg"  style="background-image: url('{{ $post->image->url() }}');  min-height: 700px; color: white; text-align: center; background-image:fixed; " >
+{{--                                <div class="fit-bg"  style="background-image: url('{{ $post->image->url() }}');  min-height: 700px; color: white; text-align: center; background-image:fixed; " >--}}
+                                    <div class="fit-bg"  style="background-image: url('{{ $post->image->url() }}');  min-height: 700px; color: white; text-align: center; background-image:fixed; " >
                                     <h1 style="padding-top: 20px; text-shadow: 1px 2px #000; background: rgba(0, 0, 0, 0.1)">
                                         @else
                                             <h1>
@@ -68,7 +69,7 @@
 
 
                         @endif
-                        <x-badge :show="true" type="primary">
+                        <br><x-badge :show="true" type="primary">
                             New post added!
                         </x-badge>
                         <br>
@@ -81,10 +82,11 @@
 
                 <p class="text-muted">Currently read by {{ $counter }} people </p>
                 <hr>
+                        <h4>Tags:</h4>
                 <x-tags :tags="$post->tags" >
                 </x-tags>
                 <hr>
-                <h4>Comments</h4>
+                <h4>Add Comments:</h4>
                         <x-commentForm :route=" route('posts.comments.store', ['post' => $post->id]) ">
                         </x-commentForm>
 

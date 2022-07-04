@@ -1,4 +1,4 @@
-<p class="text-muted" >Tags:<br>
+<h6 class="text-muted"> <br>
 
     @foreach ($tags as $tag)
 
@@ -6,7 +6,7 @@
 
     @endforeach
 
-</p>
+</h6>
 
 {{--<p>--}}
 

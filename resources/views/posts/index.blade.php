@@ -21,11 +21,7 @@
                         <div class="card-body ">
 
 
-                            @if($post->comments_count)
-                                <p>{{ $post->comments_count }} comments</p>
-                            @else
-                                <p>No comments yet!</p>
-                            @endif
+
 
                                 <div class="overlay-right d-flex justify-content-left">
                                     @auth
@@ -62,7 +58,7 @@
                         <div class="card-footer bg-white text-muted p-2">
                             @if ((new Carbon\Carbon())->diffInMinutes($post->created_at) < 50)
 
-                                <x-badge :show="true" type="primary">
+                               <x-badge :show="true" type="primary">
                                     New post added!
                                 </x-badge>
 
@@ -74,11 +70,17 @@
 
 {{--                            <x-tags :tags="$post->tags" >--}}
 {{--                            </x-tags>--}}
+
                                 <x-tags >
                                     @slot('tags', $post->tags )
                                 </x-tags>
-
+                                @if($post->comments_count)
+                                    <p>{{ $post->comments_count }} comments</p>
+                                @else
+                                    <p>No comments yet!</p>
+                                @endif
                         </div>
+
                     </div>
                 @empty
                     <p>No blog posts yet!</p>

@@ -16,6 +16,7 @@ class Comment extends Model
 
     protected $fillable = ['user_id', 'content'];
 
+
     public function commentable()
     {
         return $this->morphTo();
@@ -26,10 +27,10 @@ class Comment extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function tags()
-    {
-        return $this->morphToMany('App\Models\Tag', 'taggable')->withTimestamps();
-    }
+//    public function tags()
+//    {
+//        return $this->morphToMany('App\Models\Tag', 'taggable')->withTimestamps();
+//    }
 
     public function scopeLatest(Builder $query)
     {

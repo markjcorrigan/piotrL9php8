@@ -8,8 +8,16 @@ use App\Http\Controllers\PostTagController;
 use App\Http\Controllers\PostCommentController;
 use App\Http\Controllers\UserCommentController;
 
+
+use App\Mail\CommentPostedMarkdown;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\SiteController;
 
@@ -25,6 +33,15 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/link', function () {
+    Artisan::call('storage:link');
+});
+
+Route::get('/go', function () {
+    Artisan::call('queue:work');
+});
+
 
 //Route::get('/', function () {
 //    return view('home.index');
@@ -54,7 +71,28 @@ Route::resource('posts.comments', PostCommentController::class)->only(['store'])
 Route::resource('users.comments', UserCommentController::class)->only(['store']);
 Route::resource('users', UserController::class)->only(['show', 'edit', 'update']);
 
+Route::get('storage/avatars/{filename}', function ($filename)
+{
+    $path = storage_path('app/public/avatars/' . $filename);
+    if (!File::exists($path)) {
+        abort(404);
+    }
+    $file = File::get($path);
+    $type = File::mimeType($path);
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+    return $response;
+});
 
+Route::get('/mailable}', function () {
+    $comment = App\Models\Comment::find(1);
+    return new App\Mail\CommentPostedMarkdown($comment);
+});
+
+Route::get('mailable', function () {
+    $comment = App\Models\Comment::find(1);
+    return new App\Mail\CommentPostedMarkdown($comment);
+});
 
 Auth::routes();
 

@@ -120,11 +120,11 @@ class PostsController extends Controller
 //        }
 //        die;
 
-        if ($request->hasFile('thumbnail')) {
-            $path = $request->file('thumbnail')->store('public/thumbnail');
+        if ($request->hasFile('thumbnails')) {
+            $path = $request->file('thumbnails')->store('thumbnails');
             $blogPost->image()->save(
                 Image::make(['path' => $path])
-                ////NB this url works on local http://127.0.0.1:8000/storage/thumbnail/TMiCDEHSMyUJm4y6xFMlLeUfCBWpCSKxbK2v0qSC.png
+                ////NB this url works on local http://127.0.0.1:8000/storage/thumbnails/TMiCDEHSMyUJm4y6xFMlLeUfCBWpCSKxbK2v0qSC.png
             );
         }
         $request->session()->flash('status', 'Blog post was created!');
@@ -251,8 +251,8 @@ class PostsController extends Controller
         $post->fill($validated);
 
         if ($request->hasFile('thumbnail')) {
-            $path = $request->file('thumbnail')->store('public/thumbnail');
-
+//            $path = $request->file('thumbnail')->store('public/thumbnail');  //puts the file into public/thumbnail - available on the net
+            $path = $request->file('thumbnail')->store('public/thumbnails');
             if ($post->image) {
                 Storage::delete($post->image->path);
                 $post->image->path = $path;

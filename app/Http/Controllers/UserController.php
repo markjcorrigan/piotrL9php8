@@ -79,6 +79,7 @@ class UserController extends Controller
     {
 
         if ($request->hasFile('avatar')) {
+//            $path = $request->file('avatar')->store('public/avatars');  //puts file into public/avatars - available to the net
             $path = $request->file('avatar')->store('public/avatars');
 
             if ($user->image) {
