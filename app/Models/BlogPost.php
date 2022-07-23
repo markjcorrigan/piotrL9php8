@@ -20,6 +20,7 @@ class BlogPost extends Model
 
     protected $fillable = ['title', 'content', 'user_id'];
 
+
     public function comments()
     {
         return $this->morphMany('App\Models\Comment', 'commentable')->latest();
@@ -64,17 +65,18 @@ class BlogPost extends Model
         static::addGlobalScope(new DeletedAdminScope);
         parent::boot();
 
-        static::deleting(function (BlogPost $blogPost) {
-            $blogPost->comments()->delete();
-            Cache::tags(['blog-post'])->forget("blog-post-{$blogPost->id}");
-        });
-
-        static::updating(function (BlogPost $blogPost) {
-            Cache::tags(['blog-post'])->forget("blog-post-{$blogPost->id}");
-        });
-
-        static::restoring(function (BlogPost $blogPost) {
-            $blogPost->comments()->restore();
-        });
+      //  NB uncomment below if you have not already moved these to the Observer (BlogPostObserver.php)
+//        static::deleting(function (BlogPost $blogPost) {
+//            $blogPost->comments()->delete();
+//            Cache::tags(['blog-post'])->forget("blog-post-{$blogPost->id}");
+//        });
+//
+//        static::updating(function (BlogPost $blogPost) {
+//            Cache::tags(['blog-post'])->forget("blog-post-{$blogPost->id}");
+//        });
+//
+//        static::restoring(function (BlogPost $blogPost) {
+//            $blogPost->comments()->restore();
+//        });
     }
 }

@@ -16,6 +16,14 @@ class Comment extends Model
 
     protected $fillable = ['user_id', 'content'];
 
+    protected $hidden = [
+        'commentable_type',
+        'deleted_at',
+        'commentable_id',
+        'user_id',
+        'created_at',
+        'updated_at'
+    ];
 
     public function commentable()
     {
@@ -37,20 +45,20 @@ class Comment extends Model
         return $query->orderBy(static::CREATED_AT, 'desc');
     }
 
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function (Comment $comment) {
-            // dump($comment);
-            // dd(BlogPost::class);
-            if ($comment->commentable_type === BlogPost::class) {
-                Cache::tags(['blog-post'])->forget("blog-post-{$comment->commentable_id}");
-                Cache::tags(['blog-post'])->forget('mostCommented');
-            }
-        });
-
-        // static::addGlobalScope(new LatestScope);
-    }
+//  Can remove all of this because of the CommentObserver.php
+//    public static function boot()
+//    {
+//        parent::boot();
+//
+//        static::creating(function (Comment $comment) {
+//            // dump($comment);
+//            // dd(BlogPost::class);
+//            if ($comment->commentable_type === BlogPost::class) {
+//                Cache::tags(['blog-post'])->forget("blog-post-{$comment->commentable_id}");
+//                Cache::tags(['blog-post'])->forget('mostCommented');
+//            }
+//        });
+//
+//        // static::addGlobalScope(new LatestScope);
+//    }
 }
